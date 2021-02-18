@@ -194,6 +194,15 @@ button:hover {
 
 #rules {
   position: fixed;
-  right: 5%;
+  right: 2%;
   bottom: 2%;
+}
+
+#getRules {
+  transform: rotate (-90deg);
+}
+
+#getRules span {
+  display: inline-block;
+  transform: rotate (-90deg);
 }
