@@ -1,5 +1,5 @@
 // class Player {
-//   constructor(name, human) {
+//   constructor(name, ishuman) {
 //     this.name = name;
 //     // this.number = number
 //     this.human = human; //Human or computer player
@@ -123,91 +123,109 @@ function resetBoard() {
 
 //* POINTS
 
-// {
-//   ones: 0;        // nb of ones
-//   fives: 0;       // nb of fives
-//   triples: 0;     // number that is tripled
-//   quadruples: 0;  // number that is quadrupled
-//   quintuples:
-// }
-
-const test = [1, 2, 3, 4, 5];
-
-function ones(arr) {
-  const filtered1 = arr.filter((value) => {
-    value === 1;
-  });
-  return filtered1.length;
-}
-
-function fives(arr) {
-  const filtered5 = arr.filter((value) => {
-    value === 5;
-  });
-  return filtered5.length;
-}
-
-function triples(arr) {
-  arr.sort((a, b) => a - b);
-  for (let i of arr) {
-    if (arr[i] === arr[i + 1] && arr[i] === arr[i + 2]) {
-      if (arr[i] === 1) {
-        return arr[i] * 1000;
-      } else {
-        return arr[i] * 100;
-      }
-    }
+function ones(diceArr) {
+  const filtered1 = diceArr.filter((die) => die === 1);
+  if (filtered1.length > 2) {
+    // If more than 2 1s then triple should apply
+    return 0;
+  } else {
+    return filtered1.length * 100;
   }
 }
 
-// Test quadruple and return value of quadruple
-function quadruples(arr) {
-  arr.sort((a, b) => a - b);
-  for (let i of arr) {
-    if (
-      arr[i] === arr[i + 1] &&
-      arr[i] === arr[i + 2] &&
-      arr[i] === arr[i + 3]
-    ) {
-      if (arr[i] === 1) {
-        return arr[i] * 2000;
+function fives(diceArr) {
+  const filtered1 = diceArr.filter((die) => die === 5);
+  if (filtered1.length > 2) {
+    // If more than 2 5s then triple should apply
+    return 0;
+  } else {
+    return filtered1.length * 50;
+  }
+}
+
+// Test triple and return points
+function triple(diceArr) {
+  if (diceArr.length >= 3) {
+    // Check the number of dice
+    diceArr.sort((a, b) => a - b); // Sort the array
+    for (let i = 0; i < 3; i++) {
+      if (diceArr[i] === diceArr[i + 1] && diceArr[i] === diceArr[i + 2]) {
+        // Check if 3 consecutive equal values
+        if (diceArr[i] === 1) {
+          return diceArr[i] * 1000; // If triple 1 => 1000
+        } else {
+          return diceArr[i] * 100; // Otherwise die * 100
+        }
       } else {
-        arr[i] * 200;
+        return 0; // 0 if no triple
       }
     }
+  } else {
+    return 0; // O if not 3 dice
+  }
+}
+
+// Test quadruples and return points
+function quadruple(diceArr) {
+  if (diceArr.length >= 4) {
+    // Check the number of dice
+    diceArr.sort((a, b) => a - b); // Sort the array
+    for (let i = 0; i < 2; i++) {
+      if (
+        diceArr[i] === diceArr[i + 1] &&
+        diceArr[i] === diceArr[i + 2] &&
+        diceArr[i] === diceArr[i + 3]
+      ) {
+        if (diceArr[i] === 1) {
+          return 2000; // If triple 1 => 2000
+        } else {
+          return diceArr[i] * 200; // Otherwise die * 200
+        }
+      } else {
+        return 0; // 0 if no quadruple
+      }
+    }
+  } else {
+    return 0; // O if not 4 dice
   }
 }
 
 // Test quintuples and return points
-function quintuples(arr) {
-  if (arr.length === 5) {
-    arr.sort((a, b) => a - b);
-    for (let i of arr) {
+function quintuple(diceArr) {
+  if (diceArr.length === 5) {
+    // Check the number of dice
+    diceArr.sort((a, b) => a - b); // Sort the array
+    for (let i of diceArr) {
       if (
-        arr[i] === arr[i + 1] &&
-        arr[i] === arr[i + 2] &&
-        arr[i] === arr[i + 3] &&
-        arr[i] === arr[i + 4]
+        diceArr[0] === diceArr[1] &&
+        diceArr[0] === diceArr[2] &&
+        diceArr[0] === diceArr[3] &&
+        diceArr[0] === diceArr[4]
       ) {
-        if (arr[i] === 1) {
-          return arr[i] * 4000;
+        // Check if 4 consecutive equal values
+        if (diceArr[i] === 1) {
+          return diceArr[i] * 4000; // If triple 1 => 4000
         } else {
-          arr[i] * 400;
+          return diceArr[i] * 400; // Otherwise die * 400
         }
+      } else {
+        return 0; // 0 if no quintuple
       }
     }
+  } else {
+    return 0; // O if not 5 dice
   }
 }
 
 // Test if straight => points
-function straight(arr) {
-  if (arr.length === 5) {
-    arr.sort((a, b) => a - b);
+function straight(diceArr) {
+  if (diceArr.length === 5) {
+    diceArr.sort((a, b) => a - b);
     if (
-      arr[0] + 1 === arr[1] &&
-      arr[1] + 1 === arr[2] &&
-      arr[2] + 1 === arr[3] &&
-      arr[3] + 1 === arr[4]
+      diceArr[0] + 1 === diceArr[1] &&
+      diceArr[1] + 1 === diceArr[2] &&
+      diceArr[2] + 1 === diceArr[3] &&
+      diceArr[3] + 1 === diceArr[4]
     ) {
       return 500;
     } else {
@@ -217,10 +235,3 @@ function straight(arr) {
     return 0;
   }
 }
-
-console.log(ones(test));
-console.log(fives(test));
-console.log(triples(test));
-console.log(quadruples(test));
-console.log(quintuples(test));
-console.log(straight(test));
