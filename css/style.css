@@ -1,0 +1,199 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
+
+/** CSS reset */
+* {
+  vertical-align: baseline;
+  font-weight: inherit;
+  font-family: inherit;
+  font-style: inherit;
+  font-size: 100%;
+  border: 0 none;
+  outline: 0;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+}
+
+#board {
+  min-height: 50vh;
+  background-image: url(../img/velvet-bg.jpg);
+  background-repeat: repeat;
+  padding: 2% 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#dice {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.die,
+.die-selected {
+  background-color: white;
+  width: 150px;
+  height: 150px;
+  margin: -10px;
+  border-radius: 19px;
+  box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.4),
+    3px 6px 60px 5px rgba(0, 0, 0, 0.3) inset;
+  position: relative;
+  opacity: 1;
+  transform: scale(0.3);
+  transition: all, 0.3s;
+  background-size: contain;
+  background-position: center center;
+}
+
+.die:hover,
+.die-selected:hover {
+  transform: scale(0.5);
+  box-shadow: 3px 6px 40px 5px rgba(0, 0, 0, 0.3),
+    3px 6px 60px 5px rgba(0, 0, 0, 0.3) inset;
+  cursor: pointer;
+}
+
+.die:hover,
+.die-selected:hover {
+  transform: scale(0.7);
+}
+
+.die[value="1"],
+.die-selected[value="1"] {
+  background-image: url(../img/dice_1.png);
+  background-repeat: no-repeat;
+}
+
+.die[value="2"],
+.die-selected[value="2"] {
+  background-image: url(../img/dice_2.png);
+  background-repeat: no-repeat;
+}
+
+.die[value="3"],
+.die-selected[value="3"] {
+  background-image: url(../img/dice_3.png);
+  background-repeat: no-repeat;
+}
+
+.die[value="4"],
+.die-selected[value="4"] {
+  background-image: url(../img/dice_4.png);
+  background-repeat: no-repeat;
+}
+
+.die[value="5"],
+.die-selected[value="5"] {
+  background-image: url(../img/dice_5.png);
+  background-repeat: no-repeat;
+}
+
+.die[value="6"],
+.die-selected[value="6"] {
+  background-image: url(../img/dice_6.png);
+  background-repeat: no-repeat;
+}
+
+#points_score {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+h2 {
+  font-size: 1.6em;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+h3 {
+  font-size: 1.3em;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.6);
+}
+#scoreBoard {
+  box-sizing: border-box;
+  padding: 10px 20px;
+  width: 200px;
+  max-width: 50%;
+  border-radius: 3px;
+  background-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 3px 3px 7px 3px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#scoreBoard table {
+  width: 100%;
+}
+
+#scoreBoard td {
+  font-size: 0.8em;
+}
+
+tr .name {
+  text-align: left;
+}
+
+tr .score {
+  text-align: right;
+}
+
+tr .stick {
+  text-align: left;
+  width: 10%;
+}
+
+#buttons {
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 5%;
+}
+
+button {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  padding: 0.5em 1em;
+  outline: 0;
+  border: 0;
+  border-radius: 4px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+  background-color: rgb(33, 150, 243);
+  color: #fff;
+  font-size: 0.9em;
+
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  opacity: 0.75;
+}
+
+#side {
+  display: flex;
+  flex-direction: column-reverse;
+  flex-wrap: nowrap;
+}
+
+.roll {
+  display: flex;
+}
+
+#rules {
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+}

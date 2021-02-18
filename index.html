@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>10000, the game you do not want to loose !</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script type="module" src="js/index.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+      integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <body>
+    <section id="board">
+      <div id="points_score">
+        <div id="totalPoint">
+          <!-- *the points update after the player selects the dice -->
+          <h3 id="currentPlayerName">Augustin</h3>
+          <h2 id="currentPlayerScore">
+            <span id="currentPoints">200</span> points
+          </h2>
+        </div>
+        <div id="scoreBoard">
+          <h4>Score board</h4>
+          <!-- *generate the player div in score at the beginning of the game -->
+          <table>
+            <tr playerName="augustin">
+              <td class="name">Augustin</td>
+              <td class="score">1300</td>
+              <td class="stick"></td>
+            </tr>
+            <tr playerName="player_2">
+              <td class="name">Jerem</td>
+              <td class="score">1400</td>
+              <td class="stick">|</td>
+            </tr>
+            <tr playerName="player_3">
+              <td class="name">Marc</td>
+              <td class="score">800</td>
+              <td class="stick">||</td>
+            </tr>
+            <tr playerName="player_4">
+              <td class="name">Nico</td>
+              <td class="score">0</td>
+              <td class="stick"></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div id="dice">
+        <!-- *the dice on the board appear here -->
+      </div>
+      <div id="buttons">
+        <button id="rollButton"><i class="fas fa-dice"></i> ROLL</button>
+        <button id="scorePoints"><i class="fas fa-pen"></i> SCORE</button>
+      </div>
+    </section>
+
+    <section id="side">
+      <!-- *the selected dice appear here to get points -->
+    </section>
+
+    <section id="rules">
+      <button id="getRules">
+        <i class="fas fa-info-circle"></i> Rules & scoring
+      </button>
+    </section>
+  </body>
+</html>
