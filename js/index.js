@@ -25,6 +25,7 @@ let dicePosition = [0, 1, 2, 3, 4]; // position of the dices to id them
 let rollNumber = 0; // roll number to be able to select dice from the same roll to calculate points
 let score = 0; // Score is the addition of saved points by the player
 let points = 0; // Points are earned through dice throws and convert into score when sved by the player
+let previousRollPoints = 0; // Record of previous points to enable points to be retroactive
 let rollPoints = 0; // Points earned in a given roll
 
 // DOM elements
@@ -56,9 +57,10 @@ function rollDice() {
     const value = Math.floor(Math.random() * 6) + 1;
     diceOnBoard.push(value);
   }
-  // Increment roll number to properly sum dice & reset rollPoints
+  // Increment roll number to properly sum dice & reset rollPoints & previousRollPoints
   rollNumber += 1;
   rollPoints = 0;
+  previousRollPoints = 0;
   // Create a roll Div to put all selected div from a same roll
   let rollDivInSide = document.createElement("div");
   rollDivInSide.className = "roll";
@@ -68,19 +70,16 @@ function rollDice() {
   let pointsRollDiv = document.createElement("div");
   pointsRollDiv.className = "rollPoints";
   rollDivInSide.appendChild(pointsRollDiv);
-
-  // let pointsDiv = document.createElement("div");
-  // pointsDiv.className = "points";
-
+  // Display dice on the board
   showDiceOnBoard();
-  console.log(checkNoPointsOnBoard());
+  // Check whether there are some points on the board or lost
   if (checkNoPointsOnBoard()) {
     // All points are lost
     rollPoints = 0;
     points = 0;
     // Display points to be null
     currentPlayerPoints.textContent = points;
-
+    // Pause, message
     setTimeout(() => {
       window.alert("No point, you do not score. Next player");
       scorePoints(); // Passe au joueur suivant
@@ -135,8 +134,9 @@ function selectDieFromBoard(evt) {
   diceInRoll.push(Number(element.getAttribute("value"))); // Add the value of selected die to the roll array to calculate points
   rollPoints = calculatePoints(diceInRoll);
   rollPointsDiv.textContent = `${rollPoints} pts`; // Inject points in dedicated div as test
-  // RollPoints are added to actual points and displayed
-  points = rollPoints;
+  // RollPoints are added to actual points and displayed. Previous roll points ensure that the total points evolve correctly
+  points += rollPoints - previousRollPoints;
+  previousRollPoints = rollPoints;
   currentPlayerPoints.textContent = points;
   // Remove eventListener
   element.removeEventListener("click", selectDieFromBoard); //todo: adapt the remove EventListener pour pouvoir remettre les dés sélectionnés par erreur
@@ -188,13 +188,20 @@ function triple(diceArr) {
     diceArr.sort((a, b) => a - b); // Sort the array
     for (let i = 0; i <= diceArr.length - 3; i++) {
       // Check if 3 consecutive equal values
-      console.log("Triple " + i, diceArr[i], diceArr[i + 1], diceArr[i + 2]);
+      // console.log(
+      //   "Triple " + i,
+      //   diceArr[i],
+      //   diceArr[i + 1],
+      //   diceArr[i + 2],
+      //   diceArr[i] === diceArr[i + 1],
+      //   diceArr[i] === diceArr[i + 2]
+      // );
       if (diceArr[i] === diceArr[i + 1] && diceArr[i] === diceArr[i + 2]) {
         // Check if 1 as triple 1 is 1000
         if (diceArr[i] === 1) {
-          result = diceArr[i] * 1000; // If triple 1 => 1000
+          return (result = 1000); // If triple 1 => 1000
         } else {
-          result = diceArr[i] * 100; // Otherwise die * 100
+          return (result = diceArr[i] * 100); // Otherwise die * 100
         }
       } else {
         result = 0; // 0 if no triple
@@ -227,9 +234,9 @@ function quadruple(diceArr) {
         diceArr[i] === diceArr[i + 3]
       ) {
         if (diceArr[i] === 1) {
-          result = 2000; // If triple 1 => 2000
+          return (result = 2000); // If triple 1 => 2000
         } else {
-          result = diceArr[i] * 200; // Otherwise die * 200
+          return (result = diceArr[i] * 200); // Otherwise die * 200
         }
       } else {
         result = 0; // 0 if no quadruple
@@ -292,7 +299,6 @@ function straight(diceArr) {
 
 // Test if there are points on the board to detect pointless rolls & end the player round
 function checkNoPointsOnBoard() {
-  console.log(ones(diceOnBoard) + fives(diceOnBoard) + triple(diceOnBoard));
   return ones(diceOnBoard) + fives(diceOnBoard) + triple(diceOnBoard) === 0;
 }
 
@@ -307,12 +313,12 @@ function calculatePoints(diceArr) {
   let triplePoints = triple(diceArr);
   let straightPoints = straight(diceArr);
 
-  console.log("5x: " + quintuplePoints);
-  console.log("4x: " + quadruplePoints);
-  console.log("3x: " + triplePoints);
-  console.log("str: " + straightPoints);
-  console.log("1s: " + onesPoints);
-  console.log("5s: " + fivesPoints);
+  // console.log("5x: " + quintuplePoints);
+  // console.log("4x: " + quadruplePoints);
+  // console.log("3x: " + triplePoints);
+  // console.log("str: " + straightPoints);
+  // console.log("1s: " + onesPoints);
+  // console.log("5s: " + fivesPoints);
 
   // Identify the max combination
   const maxPoints = Math.max(
@@ -335,6 +341,5 @@ function calculatePoints(diceArr) {
     onesPoints = 0;
   }
   diceArrPoints += maxPoints + onesPoints + fivesPoints;
-  console.log(diceArrPoints);
   return diceArrPoints;
 }

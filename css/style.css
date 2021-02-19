@@ -51,6 +51,10 @@ body {
   background-position: center center;
 }
 
+.die-selected {
+  margin: -40px;
+}
+
 .die:hover,
 .die-selected:hover {
   transform: scale(0.5);
@@ -172,7 +176,7 @@ button {
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
   background-color: rgb(33, 150, 243);
   color: #fff;
-  font-size: 0.9em;
+  font-size: 1.1em;
 
   cursor: pointer;
   transition: background-color 0.3s;
@@ -190,6 +194,10 @@ button:hover {
 
 .roll {
   display: flex;
+  flex-wrap: no-wrap;
+  justify-content: start;
+  align-items: center;
+  align-content: center;
 }
 
 #rules {
