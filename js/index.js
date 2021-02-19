@@ -34,7 +34,7 @@ const side = document.querySelector("#side");
 const dice = document.querySelector("#dice");
 const rollButton = document.querySelector("#rollButton");
 const scoreButton = document.querySelector("#scorePoints");
-const rulesButton = document.querySelector("#getRules");
+// const rulesButton = document.querySelector("#getRules");
 const currentPlayerName = document.querySelector("#currentPlayerName");
 const currentPlayerPoints = document.querySelector("#currentPoints");
 

@@ -1,0 +1,86 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
+
+/** CSS reset */
+* {
+  vertical-align: baseline;
+  font-family: inherit;
+  font-size: 100%;
+  border: 0 none;
+  outline: 0;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  color: rgba(255, 255, 255, 0.8);
+  background-image: url(../img/velvet-bg.jpg);
+  background-repeat: repeat;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: bold;
+  color: #a9c8cf;
+  margin: 2% 1%;
+}
+
+h1 {
+  font-size: 2em;
+  text-align: center;
+  margin: 50px 0 20px 0;
+}
+
+h2 {
+  font-size: 1.2em;
+  text-decoration: underline;
+}
+
+h4 {
+  margin: 1%;
+}
+
+nav {
+  text-decoration: none;
+  position: fixed;
+  top: 0;
+  box-sizing: border-box;
+  width: 100%;
+  background-color: rgba(255, 255, 255);
+  margin: 0;
+  padding: 1%;
+}
+
+p {
+  margin: 1% 2%;
+}
+
+ol {
+  margin-bottom: 50px;
+}
+
+li {
+  margin: 1% 8%;
+}
+
+ul li {
+  list-style-type: "🎲 ";
+}
+
+footer {
+  box-sizing: border-box;
+  width: 100%;
+  background-color: rgba(255, 255, 255);
+  color: rgb(33, 150, 243);
+  font-size: 0.8em;
+  bottom: 0%;
+  padding: 5px 1%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+a {
+  text-decoration: none;
+}
